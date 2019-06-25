@@ -1,0 +1,81 @@
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements.  See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership.  The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License.  You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied.  See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+#macro ( banner $banner $id )
+#**##if ( $banner )
+#*  *##if( $banner.href )
+#*    *##set ( $hrf = $banner.href )
+#*    *##if ( !$decoration.isLink( $hrf ) )
+#*      *##set ( $hrf = $PathTool.calculateLink( $hrf, $relativePath ) )
+#*      *##set ( $hrf = $hrf.replaceAll( '\\', '/' ) )
+#*      *##if ( ( $hrf == '' ) )
+#*        *##set ( $hrf = './' )
+#*      *##end
+#*    *##end
+#*    *#<a href="$hrf" id="$id"#if( $banner.alt ) title="$banner.alt"#end>##
+#*  *##else
+#*    *#<div id="$id">##
+#*  *##end
+##
+#*  *##if( $banner.src )
+#*    *##set ( $src = $banner.src )
+#*    *##if ( !$decoration.isLink( $src ) )
+#*      *##set ( $src = $PathTool.calculateLink( $src, $relativePath ) )
+#*      *##set ( $src = $src.replaceAll( '\\', '/' ) )
+#*    *##end
+#*    *##if ( $banner.alt )
+#*      *##set ( $alt = ' alt="' + $banner.alt + '"' )
+#*    *##elseif ( $banner.name )
+#*      *##set ( $alt = ' alt="' + $banner.name + '"' )
+#*    *##else
+#*      *##set ( $alt = ' alt=""' )
+#*    *##end
+#*    *##if( $banner.border )
+#*      *##set ( $imgBorder = ' border="' + $banner.border + '"' )
+#*    *##else
+#*      *##set ( $imgBorder = "" )
+#*    *##end
+#*    *##if( $banner.width )
+#*      *##set ( $imgWidth = ' width="' + $banner.width + '"' )
+#*    *##else
+#*      *##set ( $imgWidth = "" )
+#*    *##end
+#*    *##if( $banner.height )
+#*      *##set ( $imgHeight = ' height="' + $banner.height + '"' )
+#*    *##else
+#*      *##set ( $imgHeight = "" )
+#*    *##end
+#*    *##if( $banner.title )
+#*      *##set ( $bannerTitle=' title="' + $banner.title + '"' )
+#*    *##else
+#*      *##set ( $bannerTitle="" )
+#*    *##end
+#*    *#<img src="$src" $alt$bannerTitle$imgBorder$imgWidth$imgHeight/>##
+#*  *##else
+#*    *#<h2>$banner.name</h2>
+#*  *##end
+##
+#*  *##if( $banner.href )
+#*    *#</a>##
+#*  *##else
+#*    *#</div>
+#*  *##end
+#**##end
+#end
+##
+##
+##

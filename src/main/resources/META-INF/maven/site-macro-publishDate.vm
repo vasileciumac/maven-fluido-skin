@@ -1,0 +1,105 @@
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements.  See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership.  The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License.  You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied.  See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+#macro ( publishDate $position $decorationPublishDate $version )
+#**##if ( $publishDate )
+#*  *##set ( $dateValue = $dateFormat.format( $publishDate ) )
+#**##elseif ( $decoration.custom.getChild( 'publishDate' ) )
+#*  *##set ( $dateValue = $decoration.custom.getChild( 'publishDate' ).getValue() )
+#**##else
+#*  *##set ( $dateValue = $dateFormat.format( $currentDate ) )
+#**##end
+##
+#**##set ( $datePosition = $decorationPublishDate.position )
+#**##set ( $versionPosition = $version.position )
+##
+#**##set ( $breadcrumbs = $decoration.body.breadcrumbs )
+#**##set ( $links = $decoration.body.links )
+##
+#**##if ( $datePosition.equalsIgnoreCase( "right" ) && ( $versionPosition.equalsIgnoreCase( "right" ) || !$topBarEnabled
+                                                                                                         && $decoration.body.links
+                                                                                                         && $decoration.body.links.size() > 0) )
+#*  *##set ( $prefix = '<span class="divider">|</span> ' )
+#**##else
+#*  *##set ( $prefix = "" )
+#**##end
+##
+#**##if ( $datePosition.equalsIgnoreCase( $position ) )
+#*  *##if ( ( $datePosition.equalsIgnoreCase( "right" ) ) || ( $datePosition.equalsIgnoreCase( "bottom" ) ) )
+        <li id="publishDate" class="pull-right">$prefix$i18n.getString( "site-renderer", $locale, "template.lastpublished" ): $dateValue</li>
+#*    *##if ( $versionPosition.equalsIgnoreCase( $position ) )
+          <li id="projectVersion" class="pull-right">##
+#*      *##if ( !$topBarEnabled
+              && $decoration.body.links
+              && $decoration.body.links.size() > 0 )
+#*        *#<span class="divider">|</span>##
+#*      *##end
+#*      *#$i18n.getString( "site-renderer", $locale, "template.version" ): ${project.version}##
+#*      *#</li>
+#*    *##end
+#*  *##elseif ( ( $datePosition.equalsIgnoreCase( "navigation-bottom" ) ) || ( $datePosition.equalsIgnoreCase( "navigation-top" ) ) )
+      <div id="lastPublished">
+        <span id="publishDate">$i18n.getString( "site-renderer", $locale, "template.lastpublished" ): $dateValue</span>
+#*    *##if ( $versionPosition.equalsIgnoreCase( $position ) )
+        <span class="divider">|</span> <span id="projectVersion">$i18n.getString( "site-renderer", $locale, "template.version" ): ${project.version}</span>
+#*    *##end
+      </div>
+#*  *##elseif ( $datePosition.equalsIgnoreCase("left") )
+        <li id="publishDate">$i18n.getString( "site-renderer", $locale, "template.lastpublished" ): $dateValue##
+#*    *##if ( $versionPosition.equalsIgnoreCase( $position ) || $breadcrumbs && $breadcrumbs.size() > 0)
+#*      *#<span class="divider">|</span>
+#*    *##end
+#*    *#</li>
+#*    *##if ( $versionPosition.equalsIgnoreCase( $position ) )
+          <li id="projectVersion">$i18n.getString( "site-renderer", $locale, "template.version" ): ${project.version}##
+#*      *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
+#*        *#<span class="divider">|</span>##
+#*      *##end
+#*      *#</li>
+#*    *##end
+#*    *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
+#*      *##breadcrumbs( $breadcrumbs "" )
+#*    *##end
+#*  *##end
+#**##elseif ( $versionPosition.equalsIgnoreCase( $position ) )
+#*  *##if ( $versionPosition.equalsIgnoreCase( "right" ) )
+      <li id="projectVersion" class="pull-right">$prefix$i18n.getString( "site-renderer", $locale, "template.version" ): ${project.version}</li>
+#*  *##elseif ( $versionPosition.equalsIgnoreCase( "bottom" ) )
+      <span id="projectVersion">$i18n.getString( "site-renderer", $locale, "template.version" ): ${project.version}</span>
+#*  *##elseif ( ( $versionPosition.equalsIgnoreCase( "navigation-bottom" ) ) || ( $versionPosition.equalsIgnoreCase( "navigation-top" ) ) )
+      <div id="lastPublished">
+        <span id="projectVersion">$i18n.getString( "site-renderer", $locale, "template.version" ): ${project.version}</span>
+      </div>
+#*  *##elseif ( $versionPosition.equalsIgnoreCase("left") )
+        <li id="projectVersion">$i18n.getString( "site-renderer", $locale, "template.version" ): ${project.version}##
+#*      *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
+#*        *#<span class="divider">|</span>##
+#*      *##end
+#*    *#</li>
+#*    *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
+#*      *##breadcrumbs( $breadcrumbs "")
+#*    *##end
+#*  *##end
+#**##elseif ( $position.equalsIgnoreCase( "left" ) )
+#*  *##if ( $breadcrumbs && $breadcrumbs.size() > 0 )
+#*    *##breadcrumbs( $breadcrumbs "" )
+#*  *##end
+#**##end
+#end
+##
+##
+##

@@ -1,0 +1,54 @@
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements.  See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership.  The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License.  You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied.  See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+#macro ( forkMeOnGitHub )
+#**##if ( $decoration.getCustomChild( 'fluidoSkin.gitHub.projectId' ) )
+##
+#*  *##set ( $gitHubProjectId = $decoration.getCustomValue( 'fluidoSkin.gitHub.projectId' ) )
+##
+#*  *##set ( $leftRibbon = { "red" : "forkme_left_red_aa0000.png", "green" : "forkme_left_green_007200.png", "black" : "forkme_left_darkblue_121621.png", "darkblue" : "forkme_left_darkblue_121621.png", "orange" : "forkme_left_orange_ff7600.png", "gray" : "forkme_left_gray_6d6d6d.png" } )
+#*  *##set ( $rightRibbon = { "red" : "forkme_right_red_aa0000.png", "green" : "forkme_right_green_007200.png", "black" : "forkme_right_darkblue_121621.png", "darkblue" : "forkme_right_darkblue_121621.png", "orange" : "forkme_right_orange_ff7600.png", "gray" : "forkme_right_gray_6d6d6d.png" } )
+##
+#*  *##set ( $ribbon = $leftRibbon )
+#*  *##set ( $ribbonOrientation = 'left' )
+#*  *##if ( $decoration.getCustomValue( 'fluidoSkin.gitHub.ribbonOrientation', '' ).equalsIgnoreCase( 'right' ) )
+#*    *##set ( $ribbonOrientation = 'right' )
+#*    *##set ( $ribbon = $rightRibbon )
+#*  *##end
+##
+#*  *##set ( $ribbonColor = 'red' )
+#*  *##set ( $definedRibbonColor = $decoration.getCustomChild( 'fluidoSkin.gitHub.ribbonColor' ) )
+##
+#*  *##if ( $definedRibbonColor
+            && ( $definedRibbonColor.getValue().equalsIgnoreCase( "red" )
+            || $definedRibbonColor.getValue().equalsIgnoreCase( "green" )
+            || $definedRibbonColor.getValue().equalsIgnoreCase( "black" )
+            || $definedRibbonColor.getValue().equalsIgnoreCase( "orange" )
+            || $definedRibbonColor.getValue().equalsIgnoreCase( "gray" ) ) )
+#*    *##set ( $ribbonColor = $definedRibbonColor.getValue().toLowerCase() )
+#*  *##end
+##
+    <a href="https://github.com/$gitHubProjectId">
+      <img style="position: absolute; top: 0; $ribbonOrientation: 0; border: 0; z-index: 10000;"
+        src="https://s3.amazonaws.com/github/ribbons/$ribbon.get( $ribbonColor )"
+        alt="Fork me on GitHub">
+    </a>
+#**##end
+#end
+##
+##
+##

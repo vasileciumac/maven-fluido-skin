@@ -1,0 +1,38 @@
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements.  See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership.  The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License.  You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied.  See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+#macro ( links $links )
+#**##set ( $counter = 0 )
+#**### MSKINS-41
+#**##set ( $begin = $links.size() - 1 )
+#**##foreach( $index in [$begin..0] )
+#*  *##set ( $item = $links.get( $index ) )
+#*  *##set ( $counter = $counter + 1 )
+#*  *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ) )
+#*  *##set ( $currentItemHref = $currentItemHref.replaceAll( '\\', '/' ) )
+##
+      <li class="pull-right">##
+#*  *##if ( $counter > 0 && $counter < $links.size() )
+#*  *#<span class="divider">|</span>
+#*  *##end
+#*  *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height false)
+#*  *#</li>
+#**##end
+#end
+##
+##
+##
